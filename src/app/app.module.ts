@@ -8,6 +8,7 @@ import { LoginComponent } from './pages/login/login.component';
 import { CheckOutComponent } from './pages/check-out/check-out.component';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { CardComponent } from './shared/card/card.component';
+import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
 
 
 
@@ -18,7 +19,8 @@ import { CardComponent } from './shared/card/card.component';
     LoginComponent,
     CheckOutComponent,
     NavBarComponent,
-    CardComponent
+    CardComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
