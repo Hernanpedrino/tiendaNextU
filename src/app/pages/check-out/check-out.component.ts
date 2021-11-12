@@ -2,12 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-check-out',
-  template: `
-    <p>
-      check-out works!
-    </p>
-  `,
-  styleUrls: ['./check-out.component.css']
+  templateUrl: './check-out.component.html',
+  styles: [
+  ]
 })
 export class CheckOutComponent implements OnInit {
 
