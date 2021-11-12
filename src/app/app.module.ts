@@ -9,6 +9,8 @@ import { CheckOutComponent } from './pages/check-out/check-out.component';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { CardComponent } from './shared/card/card.component';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
