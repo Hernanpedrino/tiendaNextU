@@ -16,7 +16,6 @@ export class HomeComponent implements OnInit {
       resp=>{
         resp.forEach(doc=>{
           this.items.push(doc);
-          console.log(this.items);
         })
       }
     );

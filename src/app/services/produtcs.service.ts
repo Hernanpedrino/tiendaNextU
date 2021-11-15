@@ -10,7 +10,7 @@ export class ProdutcsService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  getProducts(){
+  getProducts (){
     return this.firestore.
     collection<Product>('productos').
     valueChanges();

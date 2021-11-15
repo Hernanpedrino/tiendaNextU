@@ -1,9 +1,9 @@
 <div class="home">
+    <app-nav-bar></app-nav-bar>
     <div class="container">
-        <app-nav-bar></app-nav-bar>
         <div class="col">
-            <div class="row row-cols-1 row-cols-md-4 justify-content">
-                <app-card *ngFor="let item of items" [imgUrl]="item.imagen" [nombre]="item.nombre" [precio]="item.precio" [stock]="item.stock"></app-card>
+            <div class="row row-cols-1 row-cols-md-4 justify-content-center">
+                <app-card *ngFor="let item of items" [imgUrl]="item.imagen" [nombre]="item.nombre" [precio]="item.precio" [stock]="item.stock" [id]="item.id"></app-card>
             </div>
         </div>
     </div>

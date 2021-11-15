@@ -5,5 +5,6 @@ export class Product{
         public imagen: string,
         public precio: number,
         public stock: number,
+        public id: string,
     ){}
 }

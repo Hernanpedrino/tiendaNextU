@@ -13,6 +13,19 @@ export class UsersService {
   constructor() { }
   
   loginUser(email: string, password: string){
-    return firebase.auth().signInWithEmailAndPassword(email, password)
+    return firebase.auth().signInWithEmailAndPassword(email, password);
+  }
+  logOut(){
+    return firebase.auth().signOut();
+  }
+  activeUser():boolean{
+    const user = firebase.auth().currentUser;
+    if (user) {
+      return true
+    } else {
+      return false
+    }
+    
   }
 }
+
