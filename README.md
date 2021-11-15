@@ -1,6 +1,8 @@
 # TiendaNextU
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.0.1.
+
+### Datos de acceso ### 
 Mail de acceso: usuario@mail.com
 Password: 123456
 

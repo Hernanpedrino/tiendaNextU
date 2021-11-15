@@ -1,15 +1,15 @@
 <div class="login">
     <h3 class="text-center text-white">Ingrese su usuario</h3>
-    <form>
+    <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="row justify-content-md-center">
             <div class="col-md-6">
                 <div class="my-3 text-white">
                     <label for="exampleInputEmail1" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1">
+                    <input type="email" class="form-control" id="exampleInputEmail1" formControlName="email">
                 </div>
                 <div class="mb-3 text-white">
                     <label for="exampleInputPassword1" class="form-label">Password</label>
-                    <input type="password" class="form-control" id="exampleInputPassword1">
+                    <input type="password" class="form-control" id="exampleInputPassword1" formControlName="password">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
