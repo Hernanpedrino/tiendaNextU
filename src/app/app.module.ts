@@ -9,6 +9,10 @@ import { CheckOutComponent } from './pages/check-out/check-out.component';
 import { NavBarComponent } from './shared/nav-bar/nav-bar.component';
 import { CardComponent } from './shared/card/card.component';
 import { ProductDetailComponent } from './pages/product-detail/product-detail.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
 
@@ -24,7 +28,10 @@ import { ProductDetailComponent } from './pages/product-detail/product-detail.co
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]
