@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import Swal from 'sweetalert2';
 
@@ -16,8 +15,7 @@ export class LoginComponent implements OnInit {
     email: new FormControl('',[Validators.required, Validators.email])
   });
 
-  constructor(private usersService: UsersService,
-              private router: Router) { }
+  constructor(private usersService: UsersService) { }
 
   ngOnInit(): void {
   }
@@ -26,11 +24,11 @@ export class LoginComponent implements OnInit {
     const password = this.loginForm.get('password')?.value;
     this.usersService.loginUser(email, password).then(resp=>{
       if (resp) {
+        resp.user?.getIdToken().then(resp2 =>localStorage.setItem('idToken', resp2))       
         Swal.fire({
           title: 'Bienvenido a la tienda',
           icon: 'success'
         })
-        this.router.navigateByUrl('/home');
       }
     })
   }

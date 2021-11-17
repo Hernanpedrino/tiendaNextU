@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import firebase from 'firebase/compat/app';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
 firebase.initializeApp(environment.firebase);
 
 
@@ -16,16 +17,9 @@ export class UsersService {
     return firebase.auth().signInWithEmailAndPassword(email, password);
   }
   logOut(){
+    localStorage.clear();
     return firebase.auth().signOut();
   }
-  activeUser():boolean{
-    const user = firebase.auth().currentUser;
-    if (user) {
-      return true
-    } else {
-      return false
-    }
-    
-  }
+
 }
 
