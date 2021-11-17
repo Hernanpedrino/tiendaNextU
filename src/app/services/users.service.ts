@@ -22,8 +22,10 @@ export class UsersService {
   getUser():boolean{
     const user = firebase.auth().currentUser;
     if (user) {
+      console.log('auth SI hay usuario');
       return true
     } else {
+      console.log('auth no hay usuario');
       return false
     }
   }
