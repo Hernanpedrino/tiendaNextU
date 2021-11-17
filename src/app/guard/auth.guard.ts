@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot } from '@angular/router';
+import { UsersService } from '../services/users.service';
 
 
 @Injectable({
@@ -7,17 +8,12 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from
 })
 export class AuthGuard implements CanActivate {
 
-  constructor(private router: Router){}
+  constructor(private usersSerivce: UsersService){}
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot){
-    const token = localStorage.getItem('idToken')
-    if (token) {
-      this.router.navigateByUrl('/home');
-      return true
-    }else{
-      return false
-    }
+    return this.usersSerivce.getUser();
+    // TODO: Arreglar el redireccionamiento cuando sea false
   }
   
 }

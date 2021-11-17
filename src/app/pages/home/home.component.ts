@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ProdutcsService } from '../../services/produtcs.service';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -9,7 +10,8 @@ import { ProdutcsService } from '../../services/produtcs.service';
 export class HomeComponent implements OnInit {
 
   public items:any = [];
-  constructor(private productsServices: ProdutcsService) { }
+  constructor(private productsServices: ProdutcsService,
+              private usersService: UsersService) { }
 
   ngOnInit(): void {
     this.productsServices.getProducts().subscribe(
@@ -19,6 +21,7 @@ export class HomeComponent implements OnInit {
         })
       }
     );
+    this.usersService.getUser();
   }
 
 }
