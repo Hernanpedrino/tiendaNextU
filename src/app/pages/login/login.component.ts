@@ -24,8 +24,9 @@ export class LoginComponent implements OnInit {
   onSubmit(){
     const email = this.loginForm.get('email')?.value;
     const password = this.loginForm.get('password')?.value;
-    this.usersService.loginUser(email, password).then(resp=>{
-      if (resp) {     
+    this.usersService.loginUser(email, password).then(async resp=>{
+      if (resp) {
+        localStorage.setItem('idToken', await resp.user!.getIdToken())     
         Swal.fire({
           title: 'Bienvenido a la tienda',
           icon: 'success'

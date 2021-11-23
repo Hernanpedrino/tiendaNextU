@@ -19,16 +19,12 @@ export class UsersService {
     localStorage.clear();
     return firebase.auth().signOut();
   }
-  getUser():boolean{
-    const user = firebase.auth().currentUser;
-    if (user) {
-      console.log('auth SI hay usuario');
-      return true
-    } else {
-      console.log('auth no hay usuario');
-      return false
-    }
+  getUser(){
+    firebase.auth().currentUser!.getIdToken().then(resp=>{
+      localStorage.setItem('idToken', resp);
+    })
+    
   }
-
+  
 }
 
