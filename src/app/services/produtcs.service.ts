@@ -15,4 +15,10 @@ export class ProdutcsService {
     collection<Product>('productos').
     valueChanges();
   }
+  getProductById(id:string){
+    return this.firestore
+    .collection<Product>('productos')
+    .doc(`${id}`)
+    .get();
+  }
 }
