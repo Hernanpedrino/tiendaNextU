@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutcsService } from '../../services/produtcs.service';
 
 @Component({
@@ -15,6 +15,7 @@ export class ProductDetailComponent implements OnInit {
   public stock:number  | undefined;
   
   constructor(private activeRoute: ActivatedRoute,
+              private router: Router,
               private productsService: ProdutcsService) { }
 
   ngOnInit(): void {
@@ -24,8 +25,18 @@ export class ProductDetailComponent implements OnInit {
       this.imagen = resp.data()?.imagen
       this.precio = resp.data()?.precio
       this.stock = resp.data()?.stock
-      
     });
     
+  }
+  comprar(cantidad: any){
+    if (cantidad === 'Seleccionar cantidad') {
+      return;
+    }else{
+      const id = this.activeRoute.snapshot.paramMap.get('id');
+      const cantidadAactualizar = this.stock! - cantidad
+      this.productsService.updateProductById(`${id}`, cantidadAactualizar)
+      this.router.navigateByUrl('/check-out');
+    }
+
   }
 }

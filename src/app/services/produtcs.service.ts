@@ -21,4 +21,12 @@ export class ProdutcsService {
     .doc(`${id}`)
     .get();
   }
+  updateProductById(id:string, cantidad:number){
+    return this.firestore
+    .collection('productos')
+    .doc(`${id}`)
+    .update({
+      stock:`${cantidad}`
+    })
+  }
 }

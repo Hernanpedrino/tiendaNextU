@@ -20,10 +20,7 @@ export class UsersService {
     return firebase.auth().signOut();
   }
   getUser(){
-    firebase.auth().currentUser!.getIdToken().then(resp=>{
-      localStorage.setItem('idToken', resp);
-    })
-    
+    return firebase.auth().currentUser!.getIdToken();
   }
   
 }
