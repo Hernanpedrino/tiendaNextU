@@ -6,7 +6,7 @@
         <h5 class="card-title">{{ nombre | titlecase }}</h5>
         <p class="card-text">Precio: {{ precio | currency }}</p>
         <p class="card-text">Cantidad Disponible: {{stock}}</p>
-        <a href="detalles/{{id}}" class="btn btn-primary">Comprar</a>
+        <a routerLink="/detalles/{{id}}" class="btn btn-primary">Comprar</a>
     </div>
 </div>
 
