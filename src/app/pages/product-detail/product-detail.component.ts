@@ -33,8 +33,8 @@ export class ProductDetailComponent implements OnInit {
       return;
     }else{
       const id = this.activeRoute.snapshot.paramMap.get('id');
-      const cantidadAactualizar = this.stock! - cantidad
-      this.productsService.updateProductById(`${id}`, cantidadAactualizar)
+      const cantidadAactualizar = this.stock! - cantidad;
+      this.productsService.updateProductById(`${id}`, cantidadAactualizar);
       this.router.navigateByUrl('/check-out');
     }
 
