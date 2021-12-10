@@ -17,8 +17,7 @@ export class ProductDetailComponent implements OnInit {
   public nombre:string | undefined;
   public imagen:string | undefined;
   public precio:number | undefined;
-  public stock:number = 0;
-  private lStorage = localStorage.getItem('pedido');
+  public stock:number  | undefined;
   constructor(private activeRoute: ActivatedRoute,
               private router: Router,
               private productsService: ProdutcsService) { }
@@ -34,14 +33,64 @@ export class ProductDetailComponent implements OnInit {
     
   }
   comprar(cantidad: number){
+    // TODO: Verificar porque se graba la cantidad como string y no numero!!!
+    const ls = localStorage.getItem('pedido');
     const itemPedido:Pedido = {
-      cantidad: cantidad,
+      cantidad,
       precio: this.precio!,
       nombre: this.nombre!,
       imagen: this.imagen!
     }
     console.log(itemPedido);
+    if (cantidad === 0) {
+      Swal.fire({
+        title: 'Por favor seleccione una cantidad',
+        icon: 'error'
+      });
+      return
+    } 
+    if (!ls) {
+      this.pedido.push(itemPedido);
+      localStorage.setItem('pedido', JSON.stringify(this.pedido));
+      Swal.fire('Producto agregado al carrito', '', 'success');
+    } else {
+      this.pedido = JSON.parse(localStorage.getItem('pedido')!);
+      let count = 0;
+      let index:any;
+      for (const i in this.pedido) {
+        if (this.pedido[i].nombre === itemPedido.nombre) {
+          count --;
+          index = i;
+        } else {
+          count ++;  
+        }
+      }
+      if (count === this.pedido.length) {
+        this.pedido.push(itemPedido);
+        localStorage.setItem('pedido', JSON.stringify(this.pedido));
+        Swal.fire('Producto agregado al carrito', '', 'success');
+      } else {
+        Swal.fire({
+            title: 'Item ya seleccionado',
+            text: 'Este producto ya se encuentra en el carrito. Desea agregar mas cantidad?',
+            icon: 'question',
+            showCancelButton: true,
+            showConfirmButton: true
+          }).then((result)=>{
+            if (result.isConfirmed) {
+              console.log(this.pedido[index].cantidad, itemPedido.cantidad);
+              return
+              this.pedido[index].cantidad + itemPedido.cantidad;
+              this.pedido.push(itemPedido);
+              localStorage.setItem('pedido', JSON.stringify(this.pedido));
+              Swal.fire('Producto agregado', '', 'success');
+            } else {
+              return;
+            }
+          });
+        console.log(count, 'Repetido');
+      }
+    }
     
-
   }
 }
