@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UsersService } from '../../services/users.service';
@@ -11,6 +11,7 @@ import { UsersService } from '../../services/users.service';
 })
 export class NavBarComponent implements OnInit {
 
+  @Input() public cantidad: number = 0;
   constructor(private usersService: UsersService,
               private router: Router) { }
 
