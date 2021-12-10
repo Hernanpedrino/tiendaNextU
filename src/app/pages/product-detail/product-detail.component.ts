@@ -12,7 +12,7 @@ import { Pedido } from '../../models/pedido.model';
 })
 export class ProductDetailComponent implements OnInit {
   
-  cantidad = new FormControl(0);
+  selector = new FormControl(0);
   pedido:Pedido[] = [];
   public nombre:string | undefined;
   public imagen:string | undefined;
@@ -33,7 +33,6 @@ export class ProductDetailComponent implements OnInit {
     
   }
   comprar(cantidad: number){
-    // TODO: Verificar porque se graba la cantidad como string y no numero!!!
     const ls = localStorage.getItem('pedido');
     const itemPedido:Pedido = {
       cantidad,
@@ -41,7 +40,6 @@ export class ProductDetailComponent implements OnInit {
       nombre: this.nombre!,
       imagen: this.imagen!
     }
-    console.log(itemPedido);
     if (cantidad === 0) {
       Swal.fire({
         title: 'Por favor seleccione una cantidad',
@@ -78,17 +76,14 @@ export class ProductDetailComponent implements OnInit {
             showConfirmButton: true
           }).then((result)=>{
             if (result.isConfirmed) {
-              console.log(this.pedido[index].cantidad, itemPedido.cantidad);
-              return
-              this.pedido[index].cantidad + itemPedido.cantidad;
-              this.pedido.push(itemPedido);
+              this.pedido[index].cantidad += itemPedido.cantidad ;
+              console.log(this.pedido);
               localStorage.setItem('pedido', JSON.stringify(this.pedido));
               Swal.fire('Producto agregado', '', 'success');
             } else {
               return;
             }
           });
-        console.log(count, 'Repetido');
       }
     }
     
