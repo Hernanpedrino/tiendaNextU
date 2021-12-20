@@ -1,8 +1,21 @@
 <div class="home">
     <app-nav-bar></app-nav-bar>
-    <div class="container">
-        <div class="col">
-            <div class="row row-cols-1 row-cols-md-4 justify-content-center">
+    <div class="mx-4" style="background-color: white;">
+        <div class="mt-3 mb-5 mx-2">
+            <div class="row">
+                <div class="col">
+                    <h2>Catalogo de productos</h2>
+                </div>
+                <div class="col">
+                    <h4 class="text-center">Buscar producto</h4>
+                    <form>
+                        <input class="form-control mt-1" type="search" placeholder="Buscar un producto" aria-label="Search">
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col mx-1">
+            <div class="row row-cols-1 row-cols-md-4">
                 <app-card *ngFor="let item of items" [imgUrl]="item.imagen" [nombre]="item.nombre" [precio]="item.precio" [stock]="item.stock" [id]="item.id"></app-card>
             </div>
         </div>

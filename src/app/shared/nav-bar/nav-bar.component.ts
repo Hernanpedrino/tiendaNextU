@@ -11,11 +11,12 @@ import { UsersService } from '../../services/users.service';
 })
 export class NavBarComponent implements OnInit {
 
-  @Input() public cantidad: number = 0;
+  public cantidad: number = 0;
   constructor(private usersService: UsersService,
               private router: Router) { }
 
   ngOnInit(): void {
+    this.itemsCarrito();
   }
   salir(){
     Swal.fire({
@@ -28,11 +29,20 @@ export class NavBarComponent implements OnInit {
       if (result.isConfirmed) {
         this.usersService.logOut();
         this.router.navigateByUrl('/login');
+        localStorage.clear();
       } else if (result.isDenied) {
         return;
       }
     })
     
+  }
+  itemsCarrito(){
+    const ls = localStorage.getItem('pedido');
+    if (ls) {
+      const lsParsed = JSON.parse(ls);
+      this.cantidad = lsParsed.length;
+    }
+    return this.cantidad;
   }
 
 }

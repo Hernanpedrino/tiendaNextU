@@ -1,12 +1,12 @@
 
 
-<div class="card mt-2" style="width: 18rem;">
+<div class="card mt-2">
     <img src={{imgUrl}} style="height: 190px;" class="card-img-top" alt="pic">
     <div class="card-body">
         <h5 class="card-title">{{ nombre | titlecase }}</h5>
         <p class="card-text">Precio: {{ precio | currency }}</p>
         <p class="card-text">Cantidad Disponible: {{stock}}</p>
-        <a routerLink="/detalles/{{id}}" class="btn btn-primary">Comprar</a>
+        <a routerLink="/detalles/{{id}}" class="btn btn-primary">Ver detalles</a>
     </div>
 </div>
 
