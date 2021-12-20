@@ -12,6 +12,7 @@ import { Pedido } from '../../models/pedido.model';
 })
 export class ProductDetailComponent implements OnInit {
   
+  id = this.activeRoute.snapshot.paramMap.get('id');
   selector = new FormControl(0);
   pedido:Pedido[] = [];
   public nombre:string | undefined;
@@ -23,8 +24,7 @@ export class ProductDetailComponent implements OnInit {
               private productsService: ProdutcsService) { }
 
   ngOnInit(): void {
-    const id = this.activeRoute.snapshot.paramMap.get('id');
-    this.productsService.getProductById(`${id}`).subscribe(resp=>{
+    this.productsService.getProductById(`${this.id}`).subscribe(resp=>{
       this.nombre = resp.data()!.nombre
       this.imagen = resp.data()!.imagen
       this.precio = resp.data()!.precio
@@ -51,6 +51,9 @@ export class ProductDetailComponent implements OnInit {
       this.pedido.push(itemPedido);
       localStorage.setItem('pedido', JSON.stringify(this.pedido));
       Swal.fire('Producto agregado al carrito', '', 'success');
+      const cantToUpdate = this.stock! - cantidad;
+      this.productsService.updateProductById(this.id!, cantToUpdate);
+      this.router.navigateByUrl('/check-out');
     } else {
       this.pedido = JSON.parse(localStorage.getItem('pedido')!);
       let count = 0;
@@ -67,6 +70,9 @@ export class ProductDetailComponent implements OnInit {
         this.pedido.push(itemPedido);
         localStorage.setItem('pedido', JSON.stringify(this.pedido));
         Swal.fire('Producto agregado al carrito', '', 'success');
+        const cantToUpdate = this.stock! - cantidad;
+        this.productsService.updateProductById(this.id!, cantToUpdate);
+        this.router.navigateByUrl('/check-out');
       } else {
         Swal.fire({
             title: 'Item ya seleccionado',
@@ -76,10 +82,12 @@ export class ProductDetailComponent implements OnInit {
             showConfirmButton: true
           }).then((result)=>{
             if (result.isConfirmed) {
-              this.pedido[index].cantidad += itemPedido.cantidad ;
-              console.log(this.pedido);
+              const cantidadSumada = this.pedido[index].cantidad += itemPedido.cantidad ;
               localStorage.setItem('pedido', JSON.stringify(this.pedido));
               Swal.fire('Producto agregado', '', 'success');
+              const cantToUpdate = this.stock! - cantidadSumada;
+              this.productsService.updateProductById(this.id!, cantToUpdate);
+              this.router.navigateByUrl('/check-out');
             } else {
               return;
             }

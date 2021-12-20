@@ -23,10 +23,10 @@ export class ProdutcsService {
   }
   updateProductById(id:string, cantidad:number){
     return this.firestore
-    .collection('productos')
+    .collection<Product>('productos')
     .doc(`${id}`)
     .update({
-      stock:`${cantidad}`
+      stock: cantidad
     })
   }
 }
