@@ -9,7 +9,7 @@
                 <div class="col">
                     <h4 class="text-center">Buscar producto</h4>
                     <form>
-                        <input class="form-control mt-1" type="search" placeholder="Buscar un producto" aria-label="Search">
+                        <input class="form-control mt-1" type="search" (keyup)="buscar(buscador.value)" #buscador placeholder="Buscar un producto" aria-label="Search">
                     </form>
                 </div>
             </div>
@@ -17,6 +17,9 @@
         <div class="col mx-1">
             <div class="row row-cols-1 row-cols-md-4">
                 <app-card *ngFor="let item of items" [imgUrl]="item.imagen" [nombre]="item.nombre" [precio]="item.precio" [stock]="item.stock" [id]="item.id"></app-card>
+            </div>
+            <div class="alert alert-warning text-center mb-5" role="alert" *ngIf="items.length === 0">
+                No se encontraron resultados para su busqueda
             </div>
         </div>
     </div>
