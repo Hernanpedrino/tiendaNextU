@@ -1,7 +1,7 @@
 <nav class="navbar navbar-light bg-light mt-3">
     <div class="container-fluid">
       <a routerLink="/home" class="navbar-brand">La bodega tienda en linea</a>
-      <a routerLink="/check-out"><span style="color: rgb(71, 99, 255);"><i class="fas fa-shopping-cart fa-2x"><span *ngIf="cantidad > 0"> {{cantidad}}</span></i></span>
+      <a routerLink="/check-out"><span style="color: rgb(71, 99, 255);"><i class="fas fa-shopping-cart fa-2x"><span style="color: red;" *ngIf="cantidad > 0"> {{cantidad}}</span></i></span>
       </a>
       <button type="button" class="btn btn-outline-warning" (click)="salir()">Salir</button>
     </div>

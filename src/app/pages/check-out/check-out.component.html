@@ -5,29 +5,27 @@
         <thead>
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Producto</th>
+            <th scope="col" colspan="2">Producto</th>
             <th scope="col">Precio unitario</th>
             <th scope="col">Cantidad</th>
             <th scope="col">Sub-total</th>
-            <th scope="col">Quitar producto</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td><img src="../../../assets/login-fondo.jpg" style="height: 50px; width: 90px;"> Papas</td>
-            <td>123.56</td>
-            <td>3</td>
-            <td>1234.00</td>
-            <td><button class="btn btn-danger"><i class="far fa-trash-alt fa-lg"></i></button></td>
+        <tr *ngFor="let item of itemsCarrito; let i = index">
+            <th scope="row">{{i+1}}</th>
+            <td colspan="2"><img src={{item.imagen}} style="height: 50px; width: 90px;"> {{item.nombre}}</td>
+            <td>{{item.precio | currency}}</td>
+            <td>{{item.cantidad}}</td>
+            <td>{{item.precio * item.cantidad | currency}}</td>
         </tr>
         </tbody>
         <tfoot>
         <tr>
             <th scope="row">Total del pedido</th>
             <td colspan="3"></td>
-            <td>$2343.50</td>
-            <td><a routerLink="/home" class="btn btn-success">Pagar <i class="fas fa-check"></i></a></td>
+            <td><strong>{{totalPedido | currency}}</strong></td>
+            <td><button (click)="pagar()" class="btn btn-success">Pagar <i class="fas fa-check"></i></button></td>
         </tr>
         </tfoot>
     </table>
