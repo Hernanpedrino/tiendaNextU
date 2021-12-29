@@ -3,7 +3,7 @@ import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ProdutcsService } from '../../services/produtcs.service';
 import Swal from 'sweetalert2';
-import { Pedido } from '../../models/pedido.model';
+import { Pedido } from '../../interfaces/pedido';
 
 @Component({
   selector: 'app-product-detail',

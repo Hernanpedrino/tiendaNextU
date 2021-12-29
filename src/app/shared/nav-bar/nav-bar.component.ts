@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UsersService } from '../../services/users.service';
@@ -17,6 +17,7 @@ export class NavBarComponent implements OnInit {
 
   ngOnInit(): void {
     this.itemsCarrito();
+
   }
   salir(){
     Swal.fire({
@@ -42,6 +43,11 @@ export class NavBarComponent implements OnInit {
       const lsParsed = JSON.parse(ls);
       this.cantidad = lsParsed.length;
     }
+    // const cantidad$ = of<number>(this.cantidad)
+    // cantidad$.pipe(
+    //   tap(console.log),
+    //   distinctUntilChanged()
+    // ).subscribe(console.log)
     return this.cantidad;
   }
 

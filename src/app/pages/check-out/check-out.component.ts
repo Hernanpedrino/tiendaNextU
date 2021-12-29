@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { Pedido } from '../../models/pedido.model';
+import { Pedido } from '../../interfaces/pedido';
 
 @Component({
   selector: 'app-check-out',
