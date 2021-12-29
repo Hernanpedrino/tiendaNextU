@@ -1,9 +1,6 @@
-export class Pedido{
-
-    constructor(
-        public nombre: string,
-        public imagen: string,
-        public precio: number,
-        public cantidad: number,
-    ){}
+export interface Pedido{
+         nombre: string;
+         imagen: string;
+         precio: number;
+         cantidad: number;
 }
