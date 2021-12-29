@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Product } from 'src/app/models/product.model';
 import { ProdutcsService } from '../../services/produtcs.service';
-import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +9,8 @@ import { UsersService } from '../../services/users.service';
 })
 export class HomeComponent implements OnInit {
 
-  public items:any = [];
-  constructor(private productsServices: ProdutcsService,
-              private usersService: UsersService) { }
+  public items:Product[] = [];
+  constructor(private productsServices: ProdutcsService) { }
 
   ngOnInit(): void {
     this.productsServices.getProducts().subscribe(
@@ -21,6 +20,29 @@ export class HomeComponent implements OnInit {
         })
       }
     );
+  }
+  buscar(termino:string){
+    if (termino) {
+      let productosBuscados:Product[] = [];
+      termino = termino.toLowerCase();
+      for (const producto of this.items) {
+        let item = producto.nombre;
+        if (item.indexOf(termino) >= 0) {
+          productosBuscados.push(producto);
+        }
+      }
+      this.items = productosBuscados;
+      
+    } else {
+      this.items = [];
+      this.productsServices.getProducts().subscribe(
+        resp=>{
+          resp.forEach(doc=>{
+            this.items.push(doc);
+          })
+        }
+      );
+    }
   }
 
 }
